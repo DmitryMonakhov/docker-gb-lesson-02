@@ -17,11 +17,11 @@
 ```sh
 docker build --tag python-docker:v1.0 .
 ```
-Для запуска приложения `app.py` в контейнере выполним:
+Для запуска приложения `app.py` в контейнере из полученного образа `python-docker` выполним:
 ```sh
 docker run -d -p 8080:8080 python-docker:v1.0
 ```
-Произведем проверку того, что контейнер запустился и приложение прослушивает подключения на порту 8080/TCP:
+Произведем проверку того, что контейнер запустился и приложение `app.py` прослушивает подключения на порту 8080/TCP:
 ```sh
 CONTAINER ID   IMAGE                COMMAND            CREATED              STATUS              PORTS                                       NAMES
 c67bf201258c   python-docker:v1.3   "python3 app.py"   About a minute ago   Up About a minute   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   adoring_sinoussi
@@ -31,11 +31,11 @@ c67bf201258c   python-docker:v1.3   "python3 app.py"   About a minute ago   Up A
 ```sh
 docker build --tag go-docker:v1.0 .
 ```
-Для запуска приложения `main` в контейнере выполним:
+Для запуска приложения `main` в контейнере из полученного образа `go-docker` выполним:
 ```sh
 docker run -d -p 8080:8080 go-docker:v1.0
 ```
-Произведем проверку того, что контейнер запустился и приложение прослушивает подключения на порту 8080/TCP:
+Произведем проверку того, что контейнер запустился и приложение `main` прослушивает подключения на порту 8080/TCP:
 ```sh
 CONTAINER ID   IMAGE            COMMAND    CREATED         STATUS         PORTS                                       NAMES
 56a2215ad974   go-docker:v1.0   "./main"   2 minutes ago   Up 2 minutes   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   gracious_newton
