@@ -12,7 +12,7 @@
 Сохраните получившийся Dockerfile в любом публичном Git репозитории, например GitHub, и пришлите ссылку на репозиторий.
 
 # Выполнение
-### Python-приложение app.py в контейнере docker
+### Python-приложение `app.py` в контейнере docker
 Для запуска python-приложения `app.py` в контейнере подготовим `Dockerfile`. В качестве базового образа, из которого будет запускаться контейнер, используем официальный образ `python:3.6.14-alpine3.14`. Для создания базового образа в директории `python` выполним:
 ```sh
 docker build --tag python-docker:v1.0 .
@@ -25,4 +25,18 @@ docker run -d -p 8080:8080 python-docker:v1.0
 ```sh
 CONTAINER ID   IMAGE                COMMAND            CREATED              STATUS              PORTS                                       NAMES
 c67bf201258c   python-docker:v1.3   "python3 app.py"   About a minute ago   Up About a minute   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   adoring_sinoussi
+```
+### Go-приложение `main` в контейнере docker
+Для запуска go-приложения `main` в контейнере подготовим `Dockerfile`. В качестве базового образа, из которого будет запускаться контейнер, используем официальный образ `golang:1.16.7-alpine`. Сборку базового образа будем производить в две стадии (Multistage). На первом этапе произведеме компиляцию go-приложения, на втором этапе используем получившийся бинарный файл `main` и скопируем его на вторую стадию сборки образа. Для создания базового образа в директории `golang` выполним:
+```sh
+docker build --tag go-docker:v1.0 .
+```
+Для запуска приложения `main` в контейнере выполним:
+```sh
+docker run -d -p 8080:8080 go-docker:v1.0
+```
+Произведем проверку того, что контейнер запустился и приложение прослушивает подключения на порту 8080/TCP:
+```sh
+CONTAINER ID   IMAGE            COMMAND    CREATED         STATUS         PORTS                                       NAMES
+56a2215ad974   go-docker:v1.0   "./main"   2 minutes ago   Up 2 minutes   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   gracious_newton
 ```
