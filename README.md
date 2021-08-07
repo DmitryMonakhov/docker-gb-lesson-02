@@ -13,11 +13,16 @@
 
 # Выполнение
 
-Для запуска python-приложения app.py в контейнере подготовим `Dockerfile`. В качестве базового образа, из которого будет запускаться контейнер, используем официальный образ `python:3.6.14-alpine3.14`. Для создания базового образа в директории `python` выполним:
+Для запуска python-приложения `app.py` в контейнере подготовим `Dockerfile`. В качестве базового образа, из которого будет запускаться контейнер, используем официальный образ `python:3.6.14-alpine3.14`. Для создания базового образа в директории `python` выполним:
 ```sh
 docker build --tag python-docker:v1.0 .
 ```
 Для запуска приложения `app.py` в контейнере выполним:
 ```sh
-docker run -p 8080:8080 python-docker:v1.0
+docker run -d -p 8080:8080 python-docker:v1.0
+```
+Произведем проверку того, что контейнер запустился и приложение прослушивает подключения на порту 8080/TCP:
+```sh
+CONTAINER ID   IMAGE                COMMAND            CREATED              STATUS              PORTS                                       NAMES
+c67bf201258c   python-docker:v1.3   "python3 app.py"   About a minute ago   Up About a minute   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   adoring_sinoussi
 ```
